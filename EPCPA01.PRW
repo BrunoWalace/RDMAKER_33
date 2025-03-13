@@ -1,15 +1,15 @@
 #include "TOTVS.CH"
 #INCLUDE "FWMVCDEF.CH"
 /*/{Protheus.doc} User Function EPCPA01()
-	Cópia do produto para criação dos códigos para roteiro auxiliar
+	CÃ³pia do produto para criaÃ§Ã£o dos cÃ³digos para roteiro auxiliar
 	@history 31/07/2024, Marcelo Benedito, 229748 - Ajuste nos item Complementares
-	@history 11/03/2025, Bruno Walace, 247348 - Atributos do código do roteiro complementar 
+	@history 11/03/2025, Bruno Walace, 247348 - Atributos do cÃ³digo do roteiro complementar 
 	@type  Function
 	@author Marcelo Benedito
 	@since 07/09/2023
 	@version version
-	@param nenhum, sempre Nil, padrão do Protheus
-	@return nenhum, sempre Nil, padrão do Protheus
+	@param nenhum, sempre Nil, padrÃ£o do Protheus
+	@return nenhum, sempre Nil, padrÃ£o do Protheus
 	/*/
 User Function EPCPA01()
 Local aAmb		:= getarea() 
@@ -21,7 +21,7 @@ Local cCodigo 	:= ""
 SB1->( dbsetorder( 1 ) )		// filal + cod produto
 
 if alltrim(SB1->B1_GRUPO) + SB1->B1_XSUBGRP + SB1->B1_XCLASSE == "011601"
-	MESSAGEBOX( "Este código já é de roteiros complementares. Posicione sobre o código original.", "EPCPA01_01", 16 )
+	MESSAGEBOX( "Este cÃ³digo jÃ¡ Ã© de roteiros complementares. Posicione sobre o cÃ³digo original.", "EPCPA01_01", 16 )
 
 else	
 
@@ -51,9 +51,9 @@ Return Nil
 	@author user
 	@since 07/09/2023
 	@version version
-	@param cCodSb1, caracter, código original do cadastro do SB1
-	@param cCodRot, caracter, código que será atribuído ao roteiro complementar	
-	@return nenhum, sempre Nil, padrão do Protheus
+	@param cCodSb1, caracter, cÃ³digo original do cadastro do SB1
+	@param cCodRot, caracter, cÃ³digo que serÃ¡ atribuÃ­do ao roteiro complementar	
+	@return nenhum, sempre Nil, padrÃ£o do Protheus
 /*/
 Static Function CriaRotComp(cCodSb1, cCodRot)
 Local oModel
@@ -75,7 +75,7 @@ if SB1->( dbseek(xfilial("SB1") + cCodSb1))
 	oModel:Activate()
 
 //Pegando o model e setando os campos
-	// 11/03/2025 - Bruno Walace reorganização dos campos
+	// 11/03/2025 - Bruno Walace reorganizaÃ§Ã£o dos campos
 	oSB1Mod := oModel:GetModel("SB1MASTER")
 	oSB1Mod:SetValue("B1_COD"		, cCodRot ) 
 	oSB1Mod:SetValue("B1_GRUPO"		, "01" ) 
@@ -148,7 +148,7 @@ if SB1->( dbseek(xfilial("SB1") + cCodSb1))
 		EndIf
 	endif
 		
-//Se conseguir validar as informações
+//Se conseguir validar as informaÃ§Ãµes
 	If oModel:VldData()
 			
 //Tenta realizar o Commit
@@ -162,19 +162,19 @@ if SB1->( dbseek(xfilial("SB1") + cCodSb1))
 		lRet 	:= .F.
 	endif
 
-//Se não deu certo a inclusão, mostra a mensagem de erro
+//Se nÃ£o deu certo a inclusÃ£o, mostra a mensagem de erro
 //Busca o Erro do Modelo de Dados
 	if !lRet
 		aErro := oModel:GetErrorMessage()
 
 		AutoGrLog( "Codigo de Produto:         " + ' [' + cCodSB1 + ']' )
-		AutoGrLog( "Id do formulário de origem:" + ' [' + AllToChar( aErro[1]  ) + ']' )
+		AutoGrLog( "Id do formulÃ¡rio de origem:" + ' [' + AllToChar( aErro[1]  ) + ']' )
 		AutoGrLog( "Id do campo de origem:     " + ' [' + AllToChar( aErro[2]  ) + ']' )
-		AutoGrLog( "Id do formulário de erro:  " + ' [' + AllToChar( aErro[3]  ) + ']' )
+		AutoGrLog( "Id do formulÃ¡rio de erro:  " + ' [' + AllToChar( aErro[3]  ) + ']' )
 		AutoGrLog( "Id do campo de erro:       " + ' [' + AllToChar( aErro[4]  ) + ']' )
 		AutoGrLog( "Id do erro:                " + ' [' + AllToChar( aErro[5]  ) + ']' )
 		AutoGrLog( "Mensagem do erro:          " + ' [' + AllToChar( aErro[6]  ) + ']' )
-		AutoGrLog( "Mensagem da solução:       " + ' [' + AllToChar( aErro[7]  ) + ']' )
+		AutoGrLog( "Mensagem da soluÃ§Ã£o:       " + ' [' + AllToChar( aErro[7]  ) + ']' )
 		AutoGrLog( "Valor atribuido:           " + ' [' + AllToChar( aErro[8]  ) + ']' )
 		AutoGrLog( "Valor anterior:            " + ' [' + AllToChar( aErro[9]  ) + ']' )
 		MostraErro()				
@@ -190,3 +190,4 @@ SB1->( restarea( aAmbSB1 ) )
 restarea( aAmb )
 
 Return Nil
+//
